@@ -2,23 +2,30 @@
 """
 Daily Market Intelligence Dashboard — GUI Application
 Launch from Ubuntu launcher
+Fallback to CLI if tkinter unavailable
 """
 
 import json
 import os
 import sys
-import threading
 import webbrowser
 from datetime import datetime
 from pathlib import Path
-from tkinter import *
-from tkinter import messagebox, scrolledtext
+
+# Try GUI first, fall back to CLI
+GUI_AVAILABLE = False
+try:
+    from tkinter import *
+    from tkinter import messagebox, scrolledtext
+    GUI_AVAILABLE = True
+except ImportError:
+    pass
 
 try:
     import requests
     from bs4 import BeautifulSoup
 except ImportError:
-    print("Install dependencies: pip install requests beautifulsoup4")
+    print("Install dependencies: pip install --break-system-packages requests beautifulsoup4")
     sys.exit(1)
 
 
@@ -26,6 +33,44 @@ except ImportError:
 APP_DIR = Path(__file__).parent
 CONFIG_FILE = APP_DIR / "config.json"
 BRIEFINGS_DIR = APP_DIR / "briefings"
+
+
+def cli_main():
+    """CLI fallback when tkinter unavailable."""
+    print("""
+╔══════════════════════════════════════════════════════════════╗
+║        📊 DAILY MARKET INTELLIGENCE — CLI Mode                ║
+╚══════════════════════════════════════════════════════════════╝
+
+Note: tkinter not installed. Install for GUI:
+    sudo apt install python3-tk
+
+Or run the terminal version:
+    cd /home/mattz/.openclaw/workspace/daily-intel-dashboard
+    python3 daily_briefing.py --today
+
+Current Market Status:
+    """)
+    
+    # Show quick status
+    try:
+        resp = requests.get("https://api.alternative.me/fng/", timeout=5)
+        data = resp.json()
+        if data.get("data"):
+            fg = data["data"][0]
+            print(f"  Fear & Greed: {fg.get('value')}/100 ({fg.get('value_classification')})")
+    except:
+        print("  Fear & Greed: Unavailable")
+    
+    print("\nFor full dashboard, install tkinter:")
+    print("  sudo apt install python3-tk")
+    print("\nThen run:")
+    print("  python3 /home/mattz/.openclaw/workspace/daily-intel-dashboard/app/market_dashboard.py")
+    sys.exit(0)
+
+
+if not GUI_AVAILABLE:
+    cli_main()
 
 
 class MarketDashboardApp:
