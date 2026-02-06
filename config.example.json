@@ -1,0 +1,21 @@
+{
+    "news_sources": {
+        "reddit_ai": ["Artificial", "AI_Agents", "MachineLearning"],
+        "reddit_crypto": ["Bitcoin", "CryptoCurrency"],
+        "tech_blogs": ["techcrunch", "verge", "ars_technica"],
+        "twitter_trending": "ai tech crypto"
+    },
+    "keywords": [
+        "AI", "NVIDIA", "GPT", "OpenAI", "Tesla", "Bitcoin",
+        "cloud", "AWS", "earnings", "capex", "sentiment"
+    ],
+    "timezone": "America/New_York",
+    "notify_discord": false,
+    "discord_channel": "",
+    "portfolio_tickers": ["TSLA", "NVDA", "CRWD", "BTC"],
+    "notification": {
+        "discord_webhook": "",
+        "twitter": false,
+        "email": false
+    }
+}
