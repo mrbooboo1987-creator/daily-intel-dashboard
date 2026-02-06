@@ -15,7 +15,7 @@ echo "📊 Installing Daily Market Intelligence Dashboard..."
 echo "Checking dependencies..."
 if ! python3 -c "import requests, bs4, tkinter" 2>/dev/null; then
     echo "Installing Python dependencies..."
-    pip install --user requests beautifulsoup4
+    pip install --user --break-system-packages requests beautifulsoup4
 fi
 
 # Create icon (simple PNG)
