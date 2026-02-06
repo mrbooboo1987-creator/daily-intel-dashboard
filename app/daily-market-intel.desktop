@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Daily Market Intelligence
+Comment=AI-powered daily market briefing and intelligence dashboard
+Exec=/usr/bin/python3 /home/mattz/.openclaw/workspace/daily-intel-dashboard/app/market_dashboard.py
+Icon=/home/mattz/.openclaw/workspace/daily-intel-dashboard/app/icon.png
+Terminal=false
+Type=Application
+Categories=Finance;Office;Education;
+Keywords=market;finance;AI;news;trading;dashboard;
+StartupNotify=true
